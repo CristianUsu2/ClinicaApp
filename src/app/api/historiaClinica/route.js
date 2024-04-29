@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(){
     try{
-   const request=await db.query("SELECT * FROM historiaClinicas")
+   const request=await db.query("SELECT * FROM historiaClinicas join usuarios on(historiaClinicas.usuarioIdUsuario =usuarios.IdUsuario)")
    return NextResponse.json(request)
     }catch(error){
         return NextResponse.json({message: error.message})

@@ -12,7 +12,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { AlertSuccess,AlertError} from "../../components/alert";
 import {useRouter} from 'next/navigation'
-export default function CrearCita() {
+export default function CrearUsuario() {
   const router= useRouter()
   const { register, reset, handleSubmit } = useForm();
 
@@ -29,7 +29,7 @@ export default function CrearCita() {
         AlertError(data.message);
       } else {
         AlertSuccess("Se registro correctamente la cita");
-        //localStorage.setItem("user", JSON.stringify(data[0]));
+       
         router.back()
       }
     

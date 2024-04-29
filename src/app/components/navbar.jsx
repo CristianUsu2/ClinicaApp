@@ -20,7 +20,7 @@ import { useRouter } from "next/navigation";
 export const Menu = () => {
   const router=useRouter()
   const [state, setState] = useState(false);
-  const user= JSON.parse(localStorage.getItem("user"))
+ 
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -44,24 +44,8 @@ export const Menu = () => {
             <Drawer anchor="left" open={state} onClose={() => setState(false)}>
               <Box sx={{ width: 250 }} role="presentation" alignItems="center">
                 <List>
-                  {user == undefined || user == null ?
-                  
                   <Link
-                  onClick={()=>router.push("/")}
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  <ListItem key={"Login"} disablePadding>
-                    <ListItemButton
-                      onClick={() => {
-                        setState(false);
-                      }}
-                    >
-                      <ListItemText primary={"Login"} />
-                    </ListItemButton>
-                  </ListItem>
-                </Link>
-                  :   <Link
-                  onClick={()=>{localStorage.clear();router.push("/")}}
+                  onClick={()=>{router.push("/")}}
                   style={{ textDecoration: "none", color: "black" }}
                 >
                   <ListItem key={"Cerrar sesion"} disablePadding>
@@ -73,7 +57,7 @@ export const Menu = () => {
                       <ListItemText primary={"Cerrar sesion"} />
                     </ListItemButton>
                   </ListItem>
-                </Link>}
+                </Link>
                    
                  
 

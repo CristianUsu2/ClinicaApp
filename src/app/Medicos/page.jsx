@@ -7,7 +7,7 @@ import {MaterialReactTable} from "material-react-table"
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
 import moment from "moment"
 
-export default function citas(){
+export default function Medicos(){
     const [medicosData, setmedicosData]= useState([])
     const router= useRouter()
     useEffect(()=>{
@@ -15,15 +15,12 @@ export default function citas(){
     },[])
 
     const ObtenerMedicos=async()=>{
+        if(window != undefined && window != null && window != "undefined"){
       const request=await axios.get("/api/especialistas")
       const data= await request.data
-      const usuario=JSON.parse(localStorage.getItem("user"))
-      if(usuario == undefined || usuario == null){
-       router.push("/")
-      }
-    
+      
       setmedicosData(data)
-     
+    }
     }
 
     const columns=useMemo(

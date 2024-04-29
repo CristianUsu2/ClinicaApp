@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import axios from "axios";
 import { Button, Container, Grid, Typography } from "@mui/material";
 import { useEffect, useMemo, useState } from "react";
@@ -7,7 +7,7 @@ import { MaterialReactTable } from "material-react-table";
 import { MRT_Localization_ES } from "material-react-table/locales/es";
 import moment from "moment";
 
-export default function registroMedicamentos() {
+export default function Examenes() {
   const [medicamentos, setRegistroMedicamentos] = useState([]);
   const router = useRouter();
   useEffect(() => {
@@ -15,13 +15,12 @@ export default function registroMedicamentos() {
   }, []);
 
   const ObtenerCitas = async () => {
+    if(window != undefined && window != null && window != "undefined"){
     const request = await axios.get("/api/examenes");
     const data = await request.data;
-    const usuario = JSON.parse(localStorage.getItem("user"));
-    if (usuario == undefined || usuario == null) {
-      router.push("/");
-    }
+    
     setRegistroMedicamentos(data);
+  }
   };
 
   const columns = useMemo(

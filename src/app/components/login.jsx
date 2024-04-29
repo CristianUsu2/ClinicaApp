@@ -26,7 +26,7 @@ export const Login=()=> {
         AlertError(data.message) 
      }else{
         AlertSuccess("Usuario autenticado")
-        localStorage.setItem("user", JSON.stringify(data[0]))
+       
         router.push("/Home") 
 
      }

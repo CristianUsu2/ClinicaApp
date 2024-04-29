@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import {
   Container,
   Grid,
@@ -22,17 +22,20 @@ export default function CrearCita() {
   }, []);
 
   const ObtenerMedicos = async () => {
+    if(window != undefined && window != null && window != "undefined"){
     const request = await axios.get("/api/especialistas");
     const data = await request.data;
-    const usuarioInicio = JSON.parse(localStorage.getItem("user"));
+   
     const DataOptions = data.map((e) => ({
       label: `${e.Nombre}-${e.Especialidad}`,
       value: e.IdEspecialista,
       Nombre: e.Nombre,
     }));
     setMedicos(DataOptions);
-    setUsuario(usuarioInicio);
+    
+  }
   };
+
 
   const onSubmit = async (values) => {
     const NombreMedico = String(values.Medico).split("-")[0];
@@ -42,7 +45,7 @@ export default function CrearCita() {
       const ObjectCita = {
         Fecha: values.Fecha,
         Hora: values.Hora,
-        usuarioIdUsuario: usuario.IdUsuario,
+        usuarioIdUsuario: 2,
         especialistaIdEspecialista: FindMedico[0].value,
       };
 
@@ -53,7 +56,7 @@ export default function CrearCita() {
         AlertError(data.message);
       } else {
         AlertSuccess("Se registro correctamente la cita");
-        //localStorage.setItem("user", JSON.stringify(data[0]));
+        
         router.back()
       }
     }

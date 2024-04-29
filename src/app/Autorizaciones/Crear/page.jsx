@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import {
   Container,
   Grid,
@@ -12,36 +12,25 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { AlertSuccess, AlertError } from "../../components/alert";
 import {useRouter} from 'next/navigation'
-export default function CrearCita() {
+export default function CrearAutorizacion() {
   const router= useRouter()
   const { register, reset, handleSubmit } = useForm();
   const [usuarioLocal, seUsuarioLocal]=useState()
  
-  useEffect(() => {
-    Validacion();
-  }, []);
+  
 
-  const Validacion = async () => {
-    const usuario=JSON.parse(localStorage.getItem("user"))
-    
-    if(usuario == undefined || usuario == null){
-        router.push("/")
-       }else{
-        seUsuarioLocal(usuario)
-       }
-  };
+  
 
   const onSubmit = async (values) => {
     
-    values.usuarioIdUsuario=usuarioLocal.IdUsuario
+    values.usuarioIdUsuario=2
       const request = await axios.post("/api/autorizaciones", values);
       const data = await request.data;
 
       if (data.message != undefined) {
         AlertError(data.message);
       } else {
-        AlertSuccess("Se registro correctamente la solicitud");
-        //localStorage.setItem("user", JSON.stringify(data[0]));
+     
         router.back()
       }
     

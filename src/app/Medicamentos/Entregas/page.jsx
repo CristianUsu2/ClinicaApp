@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import {
   Container,
   Grid,
@@ -11,44 +11,40 @@ import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { AlertSuccess, AlertError } from "../../components/alert";
-import {useRouter} from 'next/navigation'
-export default function CrearCita() {
-  const router= useRouter()
+import { useRouter } from "next/navigation";
+export default function EntregasMedicamentos() {
+  const router = useRouter();
   const { register, reset, handleSubmit } = useForm();
   const [historia, setHistoria] = useState({});
-  const [usuario, setUsuario]=useState('')
+  const [usuario, setUsuario] = useState("");
   useEffect(() => {
     ObtenerHistoriaClinica();
   }, []);
 
   const ObtenerHistoriaClinica = async () => {
-    const usuarios=JSON.parse(localStorage.getItem("user"))
-    if(usuarios == undefined || usuarios == null){
-        router.push("/")
-        localStorage.clear()
+    if(window != undefined && window != null && window != "undefined"){
+     
+     
+      const request = await axios.get("/api/historiaClinica");
+      const data = await request.data;
+      const historiaUser = data.filter((e) => e.IdHistoriaClinica == 1);
+      setHistoria(historiaUser);
     }
-    setUsuario(usuarios)
-    const request = await axios.get("/api/historiaClinica");
-    const data = await request.data;
-    const historiaUser= data.filter(e=>e.IdHistoriaClinica ==1)
-    setHistoria(historiaUser)
-
   };
 
   const onSubmit = async (values) => {
-     values.CantidadDisponible=1
-     values.historiaClinicaIdHistoriaClinica=1
-      console.log("values", values)
+    values.CantidadDisponible = 1;
+    values.historiaClinicaIdHistoriaClinica = 1;
+    console.log("values", values);
     const request = await axios.post("/api/registroMedicamentos", values);
-      const data = await request.data;
+    const data = await request.data;
 
-      if (data.message != undefined) {
-        AlertError(data.message);
-      } else {
-        AlertSuccess("Se registro correctamente la cita");
-        router.back()
-      }
-    
+    if (data.message != undefined) {
+      AlertError(data.message);
+    } else {
+      AlertSuccess("Se registro correctamente la cita");
+      router.back();
+    }
   };
 
   return (
@@ -76,7 +72,6 @@ export default function CrearCita() {
               label="Direccion"
               type="text"
               fullWidth
-              
               {...register("Direccion")}
               required
             />
@@ -88,14 +83,10 @@ export default function CrearCita() {
               label="Descripcion"
               type="text"
               fullWidth
-              
               {...register("Descripcion")}
               required
             />
           </Grid>
-
-  
-          
 
           <Grid item xs={12} md={6} lg={6} xl={6} mt={2} mb={2}>
             <TextField
@@ -115,7 +106,7 @@ export default function CrearCita() {
             <Autocomplete
               disablePortal
               id="combo-box-demo"
-              options={[{label: "Acetaminofen", value: "Acetaminofen" }]}
+              options={[{ label: "Acetaminofen", value: "Acetaminofen" }]}
               fullWidth
               renderInput={(params) => (
                 <TextField
@@ -128,20 +119,16 @@ export default function CrearCita() {
             />
           </Grid>
 
-          
           <Grid item xs={12} md={6} lg={6} xl={6} mt={2} mb={2}>
             <TextField
               id="Metodo"
               label="Metodo de pago"
               type="text"
               fullWidth
-              
               {...register("MetodoDePago")}
               required
             />
           </Grid>
-
-        
 
           <Grid item xs={12}>
             <Button
@@ -151,7 +138,7 @@ export default function CrearCita() {
                 backgroundColor: "#1D8348",
                 width: "200px",
                 height: "35px",
-                margin:1,
+                margin: 1,
                 "&:hover": {
                   backgroundColor: "green",
                 },
@@ -168,13 +155,13 @@ export default function CrearCita() {
                 backgroundColor: "black",
                 width: "200px",
                 height: "35px",
-                margin:1,
+                margin: 1,
                 "&:hover": {
                   backgroundColor: "black",
                 },
               }}
               variant="contained"
-              onClick={()=>router.back()}
+              onClick={() => router.back()}
             >
               Cancelar
             </Button>
