@@ -2,10 +2,10 @@ import mysql from "serverless-mysql"
 
 export const db=mysql({
     config:{
-        host: 'sql5.freesqldatabase.com',
-        user: 'sql5702682',
-        password: 'NZkssBNeKz',
-        database: 'sql5702682',
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'clinica',
         port: 3306
     }
 })
