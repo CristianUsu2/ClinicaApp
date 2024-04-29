@@ -15,9 +15,9 @@
         ],
         "allowUnsafeNewFunction": true
       }
-    ],
-    "ignore": [
-      "node_modules/mysql/**/*.js"
     ]
-  }
+  },
+  "ignore": [
+    "node_modules/mysql/**/*.js"
+  ]
 }
