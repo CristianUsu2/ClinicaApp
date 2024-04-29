@@ -16,9 +16,6 @@ export async function POST(request) {
     return NextResponse.json(res);
   } catch (error) {
     return NextResponse.json({ message: error.message }, { status: 500 });
-  }finally {
-    // Cerrar la conexión al finalizar la ejecución del script
-    await db.end();
   }
 }
 
@@ -30,9 +27,6 @@ export async function GET() {
     return NextResponse.json(result);
   } catch (error) {
     return NextResponse.json({ message: error.message }, { status: 500 });
-  }finally {
-    // Cerrar la conexión al finalizar la ejecución del script
-    await db.end();
   }
 }
 

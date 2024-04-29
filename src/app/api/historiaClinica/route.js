@@ -7,9 +7,6 @@ export async function GET(){
    return NextResponse.json(request)
     }catch(error){
         return NextResponse.json({message: error.message})
-    }finally {
-      // Cerrar la conexión al finalizar la ejecución del script
-      await db.end();
     }
 }
 
@@ -28,8 +25,5 @@ export async function POST(request){
       
      }catch(error){
        return NextResponse.json({message: error.message})
-     }finally {
-      // Cerrar la conexión al finalizar la ejecución del script
-      await db.end();
-    }
+     }
   }
