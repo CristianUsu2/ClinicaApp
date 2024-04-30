@@ -41,7 +41,7 @@ export async function GET() {
   const connection = await db();
   try {
     const request = await connection.execute(
-      "SELECT * FROM registromedicamentos join historiaClinicas on(registromedicamentos.historiaClinicaIdHistoriaClinica=historiaClinicas.IdHistoriaClinica)"
+      "SELECT * FROM registromedicamentos join historiaclinicas on(registromedicamentos.historiaClinicaIdHistoriaClinica=historiaclinicas.IdHistoriaClinica)"
     );
     return NextResponse.json(request[0]);
   } catch (error) {
