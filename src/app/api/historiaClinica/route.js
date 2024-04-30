@@ -5,7 +5,7 @@ export async function GET() {
   const connection = await db();
   try {
     const request = await connection.execute(
-      "SELECT * FROM historiaClinicas join usuarios on(historiaClinicas.usuarioIdUsuario =usuarios.IdUsuario)"
+      "SELECT * FROM historiaclinicas join usuarios on(historiaClinicas.usuarioIdUsuario =usuarios.IdUsuario)"
     );
     return NextResponse.json(request[0]);
   } catch (error) {
@@ -20,7 +20,7 @@ export async function POST(request) {
   try {
     const { RegistroMedicos, usuarioIdUsuario } = await request.json();
     const [result] = await connection.execute(
-      "INSERT INTO historiaClinicas (RegistroMedicos, usuarioIdUsuario) VALUES (?, ?)",
+      "INSERT INTO historiaclinicas (RegistroMedicos, usuarioIdUsuario) VALUES (?, ?)",
       [RegistroMedicos, usuarioIdUsuario]
     );
     return NextResponse.json({
