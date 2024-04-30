@@ -30,7 +30,7 @@ export default function CrearAutorizacion() {
       if (data.message != undefined) {
         AlertError(data.message);
       } else {
-     
+       AlertSuccess("Se registro correctamente")
         router.back()
       }
     

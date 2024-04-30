@@ -106,7 +106,7 @@ export default function EntregasMedicamentos() {
             <Autocomplete
               disablePortal
               id="combo-box-demo"
-              options={[{ label: "Acetaminofen", value: "Acetaminofen" }]}
+              options={[{ label: "Acetaminofen", value: "Acetaminofen" }, { label: "Gotas alergia", value: "Gotas alergia" }]}
               fullWidth
               renderInput={(params) => (
                 <TextField

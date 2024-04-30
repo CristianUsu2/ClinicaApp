@@ -2,15 +2,15 @@ import { db } from "../libs/database";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
+  const connection = await db();
   try {
     const { Descripcion, Resultado, Fecha, usuarioIdUsuario } =
       await request.json();
-    const result = await db.query("INSERT INTO procedimientos SET ?", {
-      Descripcion,
-      Resultado,
-      Fecha,
-      usuarioIdUsuario,
-    });
+      const [result] = await connection.execute(
+        "INSERT INTO procedimientos (Descripcion, Resultado, Fecha, usuarioIdUsuario) VALUES (?, ?, ?, ?)",
+        [Descripcion, Resultado, Fecha, usuarioIdUsuario]
+      );
+      
     return NextResponse.json({
       Descripcion,
       Resultado,
@@ -20,19 +20,20 @@ export async function POST(request) {
     });
   } catch (error) {
     return NextResponse.json({ message: error.message });
-  }finally {
+  } finally {
     // Cerrar la conexión al finalizar la ejecución del script
-    await db.end();
+    await connection.end();
   }
 }
 
-
-
-export async function GET(){
-  try{
-     const result= await db.query("SELECT * FROM procedimientos")
-     return NextResponse.json(result)
-  }catch(error){
-      return NextResponse.json({message: error.message})
+export async function GET() {
+  const connection = await db();
+  try {
+    const result = await connection.execute("SELECT * FROM procedimientos");
+    return NextResponse.json(result[0]);
+  } catch (error) {
+    return NextResponse.json({ message: error.message });
+  } finally {
+    await connection.end();
   }
 }
